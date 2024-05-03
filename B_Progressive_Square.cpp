@@ -1,5 +1,5 @@
-// DATE: 19-02-2024
-// TIME: 20-11-11
+//DATE: 08-04-2024
+//TIME: 21-05-52 
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
@@ -28,19 +28,49 @@ using namespace std;
 #define mpp(type1, type2, name) map<type1, type2> name
 
 const int M = 1e9 + 7;
-const int N = 2e5 + 7;
+const int N = 1e5 + 7;
 #define Pi 3.1415926535897932384626
 // extern int x;
 
-int sumofdigit(int x)
-{
-    int sum = 0;
-    while (x != 0)
-    {
-        sum += (x % 10);
-        x = x / 10;
+
+void solved() {
+    int n, c, d;
+    cin >> n >> c >> d;
+
+    unordered_map<int, int> mp;
+    unordered_map<int, int> mp2;
+    int a = INT_MAX;
+
+    for (int i = 0; i < n * n; i++) {
+        int x;
+        cin >> x;
+        a = min(a, x);
+        mp[x]++;
     }
-    return sum;
+
+    vector<vector<int>> v(n, vector<int>(n));
+
+    v[0][0] = a;
+    mp2[v[0][0]]++;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 1; j < n; j++) {
+            v[i][j] = v[i][j - 1] + c;
+            mp2[v[i][j]]++;
+        }
+        if (i + 1 < n) {
+            v[i + 1][0] = v[i][0] + d;
+            mp2[v[i + 1][0]]++;
+        }
+    }
+
+    if (mp.size() != mp2.size() || any_of(mp.begin(), mp.end(), [&](const pair<int, int>& kv) {
+        return !mp2.count(kv.first) || mp2[kv.first] != kv.second;
+    })) {
+        cout << "NO" << endl;
+    } else {
+        cout << "YES" << endl;
+    }
 }
 
 int main()
@@ -48,19 +78,11 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(NULL);
-    int t;
+    ll t = 1;
     cin >> t;
-    vector<int> v(N);
-    for (int i = 1; i < N; i++)
-    {
-        v[i] = v[i - 1] + sumofdigit(i);
-    }
     while (t--)
     {
-        // solve();
-        int n;
-        cin>>n;
-        cout << v[n] << endl;
+        solved();
     }
     return 0;
 }

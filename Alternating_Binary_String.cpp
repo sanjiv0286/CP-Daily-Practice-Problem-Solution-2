@@ -1,13 +1,16 @@
-// DATE: 19-02-2024
-// TIME: 20-11-11
+// DATE: 18-04-2024
+// TIME: 00-12-00
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
 
 #define ll long long
 #define all(a) a.begin(), a.end()
-
-#define forn(i, n) for (int i = 0; i < n; i++)
+#define input_int(a) \
+    int a;           \
+    cin >> a;
+#define input_string(a) string a;cin >> a;
+#define forn(i, a, n) for (int i = a; i < n; i++)
 #define rep(i, a, b) for (int i = a; i <= b; i++)
 #define dep(i, b, a) for (int i = b; i >= a; i--)
 
@@ -28,39 +31,39 @@ using namespace std;
 #define mpp(type1, type2, name) map<type1, type2> name
 
 const int M = 1e9 + 7;
-const int N = 2e5 + 7;
+const int N = 1e5 + 7;
 #define Pi 3.1415926535897932384626
 // extern int x;
 
-int sumofdigit(int x)
+void solve()
 {
-    int sum = 0;
-    while (x != 0)
+    input_int(n);
+    input_string(s);
+    if (n == 1)
     {
-        sum += (x % 10);
-        x = x / 10;
+        print(0);
+        return;
     }
-    return sum;
+    ll ct = 0;
+    forn(i, 1, n)
+    {
+        if (s[i] == s[i - 1])
+        {
+            ct++;
+        }
+    }
+    cout << ct << endl;
 }
-
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(NULL);
-    int t;
+    ll t = 1;
     cin >> t;
-    vector<int> v(N);
-    for (int i = 1; i < N; i++)
-    {
-        v[i] = v[i - 1] + sumofdigit(i);
-    }
     while (t--)
     {
-        // solve();
-        int n;
-        cin>>n;
-        cout << v[n] << endl;
+        solve();
     }
     return 0;
 }

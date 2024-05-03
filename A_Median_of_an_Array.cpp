@@ -1,5 +1,5 @@
-// DATE: 19-02-2024
-// TIME: 20-11-11
+// DATE: 22-03-2024
+// TIME: 22-35-44
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
@@ -28,39 +28,71 @@ using namespace std;
 #define mpp(type1, type2, name) map<type1, type2> name
 
 const int M = 1e9 + 7;
-const int N = 2e5 + 7;
+const int N = 1e5 + 7;
 #define Pi 3.1415926535897932384626
 // extern int x;
 
-int sumofdigit(int x)
+void solve()
 {
-    int sum = 0;
-    while (x != 0)
-    {
-        sum += (x % 10);
-        x = x / 10;
-    }
-    return sum;
-}
+    int n;
+    cin >> n;
+    vector<int> v;
 
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        v.push_back(x);
+    }
+    if (n == 1)
+    {
+        print(1);
+        return;
+    }
+    sort(all(v));
+    int ct = 0;
+    // *************************************
+    // for (int i = (n - 1) / 2; i < n; i++)
+    // {
+    //     if (v[i] == v[(n-1)/ 2])
+    //     {
+    //         ct++;
+    //     }
+    // }
+    // ***************************************
+    if (n % 2 == 0)
+    {
+        for (int i = n / 2 - 1; i < n; i++)
+        {
+            if (v[i] == v[n / 2 - 1])
+            {
+                ct++;
+            }
+        }
+    }
+    else
+    {
+        for (int i = n / 2; i < n; i++)
+        {
+            if (v[i] == v[n / 2])
+            {
+                ct++;
+            }
+        }
+    }
+    // **********************************
+    print((ct));
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(NULL);
-    int t;
+    ll t = 1;
     cin >> t;
-    vector<int> v(N);
-    for (int i = 1; i < N; i++)
-    {
-        v[i] = v[i - 1] + sumofdigit(i);
-    }
     while (t--)
     {
-        // solve();
-        int n;
-        cin>>n;
-        cout << v[n] << endl;
+        solve();
     }
     return 0;
 }

@@ -1,5 +1,7 @@
-// DATE: 19-02-2024
-// TIME: 20-11-11
+
+
+// DATE: 10-04-2024
+// TIME: 20-36-57
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
@@ -28,39 +30,36 @@ using namespace std;
 #define mpp(type1, type2, name) map<type1, type2> name
 
 const int M = 1e9 + 7;
-const int N = 2e5 + 7;
+const int N = 1e5 + 7;
 #define Pi 3.1415926535897932384626
 // extern int x;
 
-int sumofdigit(int x)
+void solve()
 {
-    int sum = 0;
-    while (x != 0)
+    int n, ct = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        sum += (x % 10);
-        x = x / 10;
+        int num;
+        cin >> num;
+        if (num == 2)
+            ct++;
     }
-    return sum;
+    if (ct % 8 == 0)
+        cout << "YES\n";
+    else
+        cout << "NO\n";
 }
-
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(NULL);
-    int t;
+    ll t = 1;
     cin >> t;
-    vector<int> v(N);
-    for (int i = 1; i < N; i++)
-    {
-        v[i] = v[i - 1] + sumofdigit(i);
-    }
     while (t--)
     {
-        // solve();
-        int n;
-        cin>>n;
-        cout << v[n] << endl;
+        solve();
     }
     return 0;
 }

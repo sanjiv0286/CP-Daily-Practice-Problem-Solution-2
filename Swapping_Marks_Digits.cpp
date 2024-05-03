@@ -1,15 +1,15 @@
-// DATE: 19-02-2024
-// TIME: 20-11-11
+//DATE: 17-04-2024
+//TIME: 23-47-06 
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
 
 #define ll long long
 #define all(a) a.begin(), a.end()
-
+#define input(a)  int a; cin>>a;
 #define forn(i, n) for (int i = 0; i < n; i++)
 #define rep(i, a, b) for (int i = a; i <= b; i++)
-#define dep(i, b, a) for (int i = b; i >= a; i--)
+#define dep(i, b, a) for (int i = b; i > a; i--)
 
 #define print(x) cout << x << "\n"
 #define vin(v)        \
@@ -28,39 +28,44 @@ using namespace std;
 #define mpp(type1, type2, name) map<type1, type2> name
 
 const int M = 1e9 + 7;
-const int N = 2e5 + 7;
+const int N = 1e5 + 7;
 #define Pi 3.1415926535897932384626
 // extern int x;
 
-int sumofdigit(int x)
+void solve()
 {
-    int sum = 0;
-    while (x != 0)
-    {
-        sum += (x % 10);
-        x = x / 10;
-    }
-    return sum;
-}
+    input(a);
+    input(b);
+   
+    string c = to_string(a);
+    string d = to_string(b);
+    // reverse(c.begin(),c.end());
+    reverse(all(c));
+    // reverse(d.begin(),d.end());
+    reverse(all(d));
+    int rev1 = stoi(c);
+    int rev2 = stoi(d);
+    if(a>b||a>rev2||rev1>rev2||rev1>b){
+        print("YES");
 
+    }
+    else{
+        print("NO");
+
+    }
+
+
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(NULL);
-    int t;
+    ll t = 1;
     cin >> t;
-    vector<int> v(N);
-    for (int i = 1; i < N; i++)
-    {
-        v[i] = v[i - 1] + sumofdigit(i);
-    }
     while (t--)
     {
-        // solve();
-        int n;
-        cin>>n;
-        cout << v[n] << endl;
+        solve();
     }
     return 0;
 }

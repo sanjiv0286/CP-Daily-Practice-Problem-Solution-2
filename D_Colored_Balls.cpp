@@ -1,5 +1,3 @@
-// DATE: 19-02-2024
-// TIME: 20-11-11
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
@@ -27,40 +25,42 @@ using namespace std;
 #define set(type, name) set<type> name
 #define mpp(type1, type2, name) map<type1, type2> name
 
-const int M = 1e9 + 7;
-const int N = 2e5 + 7;
-#define Pi 3.1415926535897932384626
-// extern int x;
+const int N = 5050;
+const int MOD = 998244353;
 
-int sumofdigit(int x)
+int a[N], sum[N] = {1};
+
+void solve()
 {
-    int sum = 0;
-    while (x != 0)
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        cin >> a[i];
+    sort(a + 1, a + n + 1);
+    int ans = 0;
+    for (int i = 1, x; i <= n; i++)
     {
-        sum += (x % 10);
-        x = x / 10;
+        x = a[i];
+        for (int j = 0; j <= x; j++)
+            ans = (ans + (long long)sum[j] * x) % MOD;
+        for (int j = x + 1; j < N; j++)
+            ans = (ans + (long long)sum[j] * ((j + x + 1) / 2)) % MOD;
+        for (int j = N - 1; j >= 0; j--)
+            if (j >= x)
+                sum[j] = (sum[j] + sum[j - x]) % MOD;
     }
-    return sum;
+    cout << ans << endl;
 }
-
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(NULL);
-    int t;
-    cin >> t;
-    vector<int> v(N);
-    for (int i = 1; i < N; i++)
-    {
-        v[i] = v[i - 1] + sumofdigit(i);
-    }
+    ll t = 1;
+    // cin >> t;
     while (t--)
     {
-        // solve();
-        int n;
-        cin>>n;
-        cout << v[n] << endl;
+        solve();
     }
     return 0;
 }

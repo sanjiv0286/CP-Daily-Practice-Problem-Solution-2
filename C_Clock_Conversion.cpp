@@ -1,5 +1,5 @@
-// DATE: 19-02-2024
-// TIME: 20-11-11
+// DATE: 28-03-2024
+// t: 20-32-48
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
@@ -28,39 +28,47 @@ using namespace std;
 #define mpp(type1, type2, name) map<type1, type2> name
 
 const int M = 1e9 + 7;
-const int N = 2e5 + 7;
+const int N = 1e5 + 7;
 #define Pi 3.1415926535897932384626
 // extern int x;
 
-int sumofdigit(int x)
+string convert(string t)
 {
-    int sum = 0;
-    while (x != 0)
+    int h = stoi(t.substr(0, 2));
+    int min = stoi(t.substr(3, 2));
+
+    string suffix = (h < 12) ? "AM" : "PM";
+    if (h == 0)
     {
-        sum += (x % 10);
-        x = x / 10;
+        h = 12;
     }
-    return sum;
+    else if (h > 12)
+    {
+        h -= 12;
+    }
+    //  return setw(2) << setfill('0') << hour << ":" << setw(2) << setfill('0') << minute << " " << suffix;
+    if (h < 10)
+        return "0" + to_string(h) + ":" + (min < 10 ? "0" : "") + to_string(min) + " " + suffix;
+
+    return to_string(h) + ":" + (min < 10 ? "0" : "") + to_string(min) + " " + suffix;
 }
 
+void solve()
+{
+    string t;
+    cin >> t;
+    cout << convert(t) << endl;
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(NULL);
-    int t;
+    ll t = 1;
     cin >> t;
-    vector<int> v(N);
-    for (int i = 1; i < N; i++)
-    {
-        v[i] = v[i - 1] + sumofdigit(i);
-    }
     while (t--)
     {
-        // solve();
-        int n;
-        cin>>n;
-        cout << v[n] << endl;
+        solve();
     }
     return 0;
 }
